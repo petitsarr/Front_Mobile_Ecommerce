@@ -1,17 +1,27 @@
-import { StyleSheet, Text, View  , Image} from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View  , Image , Pressable } from 'react-native'
+import React , {useState} from 'react'
 import  { Prope } from "./ProductItem" 
 
 const ProductCard = ({item} : Prope) => {   
+    
+   
 
-    const {name, image, price, description} = item ; 
+    const {name, image, price, description , countInStock} = item ; 
 
         return (
                 <View  style = {styles.container}> 
                     <Image source={{uri :image }} style={styles.image} /> 
                     <Text style={styles.name}>{name}</Text> 
                     <Text style={styles.price}>{price}</Text>
-
+                   {
+                    countInStock  > 0 ? ( 
+                        <Pressable onPress={()=>console.log("hello petit")}>
+                        <View style ={{backgroundColor :"#32CD32" ,padding:5,borderRadius :5 ,marginVertical:7 }}>  
+                            <Text style ={{color:"white"}}>Add to Cart</Text>
+                             </View> 
+                             </Pressable>
+                    ) : <Text style ={{color :"#32CD32"}}>Actuellement Indisponible</Text>
+                   }
                 </View>
   )
 }
