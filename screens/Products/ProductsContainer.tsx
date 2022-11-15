@@ -31,7 +31,7 @@ const ProductsContainer = () => {
 
 
 
-   // Filtré mes produits en fonction du nom de la marque . 
+   // Search Product By Name  . 
 
    const filterProducts = (text : string )=>{
          const filterred   = data.filter((product)=>{ 
@@ -63,7 +63,7 @@ const ProductsContainer = () => {
         renderItem={({item}) => { 
 
             return ( 
-                
+
                     <ProductItem item={item}  />
                     
             )
