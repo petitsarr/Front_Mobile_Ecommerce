@@ -1,10 +1,13 @@
-import { View, Text  , FlatList,ListRenderItemInfo , StyleSheet , TextInput}  from 'react-native'
+import { View, Text  , FlatList,ListRenderItemInfo , StyleSheet , TextInput ,TouchableWithoutFeedback}  from 'react-native'
 import React , {useState ,useEffect}  from 'react' 
 import data from "../../assets/data/product"   ; 
-import ProductItem from  "./ProductItem"
-import Header from "../../Shared/Header"  
+import ProductItem from  "./ProductItem" 
+import Header from "../../Shared/Header"   
+import { EvilIcons } from '@expo/vector-icons';  
+import Banner from "../../Shared/Banner"
 
-type dataType = {
+
+export type dataType = {
     _id: {
         $oid: string;
     };
@@ -23,56 +26,91 @@ type dataType = {
     __v: number;
   }
 
-const ProductsContainer = () => { 
-   // const  [products, setProducts] = useState<Product>([]) 
+const ProductsContainer = () => {  
 
-   const [filter , setFilter] = useState(false) ;  
-   const [filterProduct , setFilterProduct] = useState<dataType[]>([]) ; 
+            const [products, setProducts] = useState<dataType[]>([]) 
+            const [filter , setFilter] = useState<boolean>(false) ;  
+            const [filterProduct , setFilterProduct] = useState<dataType[]>([]) ; 
+             
 
 
+            useEffect(()=>{ 
+                setProducts(data)
+               // setFilterProduct(data)   
+              
 
+                return ()=>{
+                    setProducts([])
+                    setFilterProduct([])  
+                  
+                }
+
+            } , []) 
+            
+
+            
+ 
+
+                
    // Search Product By Name  . 
 
-   const filterProducts = (text : string )=>{
-         const filterred   = data.filter((product)=>{ 
-            let dataText = text.toUpperCase() ; 
-            let productName = product.name.toUpperCase() ; 
-            return productName.indexOf(dataText) > -1 ;
-         }) 
-         setFilterProduct(filterred) ; 
-         setFilter(true) ;
-   } 
+                const filterProducts = (text : string )=>{ 
+                        
+                        const filterred   = data.filter((product)=>{  
+
+                            let dataText = text.toUpperCase() ;  
+
+                            let productName = product.name.toUpperCase() ;  
+
+                            return productName.indexOf(dataText) > -1 ;
+                        }) 
+                        setFilterProduct(filterred) ;  
+
+                        setFilter(true) ;
+                }  
+
+                
 
   return (
-    <View> 
+    <View style={styles.containerP}> 
         <Header />   
         
-        <View style={styles.searchContainer}> 
+        <View style={styles.searchContainer}>  
+        <EvilIcons name="search" size={24} color="black" style ={{marginTop :10}} />
             <TextInput 
-             style={styles.input}  
-             placeholder="Saisir Votre Recherche Ici "  
-             onChangeText={(text)=>filterProducts(text)}
-              /> 
-        </View>
-      <FlatList    
-
-       contentContainerStyle={styles.list} 
-
-        data={filter ? filterProduct : data} 
+               style={styles.input}  
+                placeholder="Saisir Votre Recherche Ici "  
+                onChangeText={(text)=>filterProducts(text)} 
+              />     
+        </View>   
+        <View style={styles.banner}>
+            <Banner />
+        </View> 
+         <View style = {{flex:0.5 , backgroundColor:"red"}} />
        
-        renderItem={({item}) => { 
+              <View style= {styles.containerFlatlist}>
+              <FlatList    
 
-            return ( 
+                    contentContainerStyle={styles.list} 
 
-                    <ProductItem item={item}  />
-                    
-            )
-            }} 
-            
-        keyExtractor = {(item) => item._id.$oid}
+                        data={filter ? filterProduct : products} 
 
-     
-      />
+                        renderItem={({item}) => { 
+
+                            return ( 
+
+                                    <ProductItem item={item}  />
+                                    
+                            )
+                            }} 
+                            
+                        keyExtractor = {(item) => item._id.$oid}
+
+
+/> 
+              </View>
+        
+      
     </View>
   )
 } 
@@ -81,23 +119,48 @@ const styles = StyleSheet.create({
     list: { 
         justifyContent: 'space-around',
         flexDirection: 'row',
-        flexWrap: 'wrap', 
+        flexWrap: 'wrap',  
+      //  marginTop : 60 , 
+      //  flex : 1.5, 
+       // backgroundColor :"white" ,
          
     } , 
     searchContainer : { 
-        margin : 10 , 
+     //   marginBottom : 20 ,  
+        marginHorizontal : 15 ,
         backgroundColor : "white" , 
+        marginTop : 5 , 
         padding : 5 , 
-        borderRadius : 10 , 
+        borderRadius : 12 , 
        // elevation : 10,  
-       height : 40 ,
+       height : 60 , 
+         flexDirection : "row" , 
+          //  justifyContent : "space-around" , 
+         // width :"100%" 
+         flex : 0.2,
 
     } ,
     input :{
         fontSize : 18 , 
         fontWeight : "bold" , 
-        color : "black" , 
+        color : "black" ,  
+        
 
+    } ,
+    containerP :{
+        flex : 1 , 
+        backgroundColor : "#DCDCDC" ,
+    } ,
+    banner :{
+        flex : 0.8, 
+        backgroundColor : "white" ,   
+        paddingVertical : 10 , 
+        margin : 10, 
+        borderRadius : 12 ,
+        
+    } ,
+    containerFlatlist :{
+        flex : 3,
     }
 
 })
