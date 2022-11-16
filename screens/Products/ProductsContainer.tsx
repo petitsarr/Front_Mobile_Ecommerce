@@ -65,7 +65,13 @@ const ProductsContainer = () => {
             } , []) 
             
 
-            
+      //Filter Product By Category   
+          const filterProductByCategory = (id:string) =>{ 
+                        const newProduct = products.filter((item)=>item.category.$oid === id) ; 
+                        setFilter(true) ;
+                        setFilterProduct(newProduct) ; 
+                     //  setActive(id) ; 
+          }       
  
 
                 
@@ -92,19 +98,26 @@ const ProductsContainer = () => {
     <View style={styles.containerP}> 
         <Header />   
         
-        <View style={styles.searchContainer}>  
-        <EvilIcons name="search" size={24} color="black" style ={{marginTop :10}} />
+        <View style={styles.searchContainer}>   
+
+        <EvilIcons name="search" size={24} color="black" style ={{marginTop :10}} /> 
+
             <TextInput 
                style={styles.input}  
                 placeholder="Saisir Votre Recherche Ici "  
                 onChangeText={(text)=>filterProducts(text)} 
               />     
-        </View>   
+        </View>    
+
         <View style={styles.banner}>
             <Banner />
-        </View> 
+        </View>  
+
          <View style = {{flex:0.5 , backgroundColor:"white"}} > 
-            <CategoryFilter   />
+              <CategoryFilter 
+               categorie = {categ}    
+                filterProductByCategory = {filterProductByCategory}
+                />
          </View>
        
               <View style= {styles.containerFlatlist}>

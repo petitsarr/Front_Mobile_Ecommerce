@@ -100,7 +100,7 @@ type dataType = {
     "rating": 5,
     "numReviews": 0,
     "isFeatured": true,
-    "name": "Sofa",
+    "name": "Sofa2",
     "description": "Big Sofa for living room",
     "category": {
       "$oid": "5f15d5b2cb4a6642bddc0fe7"
