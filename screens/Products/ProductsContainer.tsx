@@ -4,7 +4,9 @@ import data from "../../assets/data/product"   ;
 import ProductItem from  "./ProductItem" 
 import Header from "../../Shared/Header"   
 import { EvilIcons } from '@expo/vector-icons';  
-import Banner from "../../Shared/Banner"
+import Banner from "../../Shared/Banner" 
+import category from "../../assets/data/categories" ; 
+import CategoryFilter  from "../../components/CategoryFilter" ;
 
 
 export type dataType = {
@@ -24,23 +26,38 @@ export type dataType = {
     };
     countInStock: number;
     __v: number;
-  }
+  } 
+
+  export type datacategory = {
+    _id: {
+        $oid: string;
+    };
+    name: string;
+    __v: number;
+}[]
 
 const ProductsContainer = () => {  
 
             const [products, setProducts] = useState<dataType[]>([]) 
             const [filter , setFilter] = useState<boolean>(false) ;  
-            const [filterProduct , setFilterProduct] = useState<dataType[]>([]) ; 
+            const [filterProduct , setFilterProduct] = useState<dataType[]>([]) ;  
+            const [categ , setCateg] = useState<datacategory>([]) ;  
+            const [active ,setActive] = useState() ; 
              
 
 
             useEffect(()=>{ 
-                setProducts(data)
+                setProducts(data) 
+                setCateg(category) 
+                //setActive(category[0]._id.$oid) 
+              //  setActive(-1)
                // setFilterProduct(data)   
               
 
                 return ()=>{
-                    setProducts([])
+                    setProducts([]) 
+                    setCateg([])  
+                  //  setActive()
                     setFilterProduct([])  
                   
                 }
@@ -86,7 +103,9 @@ const ProductsContainer = () => {
         <View style={styles.banner}>
             <Banner />
         </View> 
-         <View style = {{flex:0.5 , backgroundColor:"red"}} />
+         <View style = {{flex:0.5 , backgroundColor:"white"}} > 
+            <CategoryFilter   />
+         </View>
        
               <View style= {styles.containerFlatlist}>
               <FlatList    

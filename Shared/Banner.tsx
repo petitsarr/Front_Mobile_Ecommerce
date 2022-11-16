@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View  ,Image} from 'react-native' 
+import { StyleSheet, Text, View  ,Image ,ScrollView} from 'react-native' 
 import Swiper from "react-native-swiper"
 import React , {useState ,useEffect} from 'react'
 
@@ -20,13 +20,14 @@ const Banner = () => {
     } , [])
 
   return (
-   <View style ={styles.container} > 
+   <ScrollView>
+         <View style ={styles.container} > 
       <View style = {styles.swiper}>
             <Swiper  
                     autoplay={true} 
                     autoplayTimeout={2} 
                     showsButtons={false} 
-                    showsPagination={true} 
+                      showsPagination={true} 
                     dotColor="white"
                     activeDotColor="red"
 
@@ -44,6 +45,7 @@ const Banner = () => {
       </View>
 
    </View>
+   </ScrollView>
   )
 }
 
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
     } ,
     swiper :{
         width : "90%" , 
-        height : 80 , 
+        height : 120 , 
         backgroundColor : "white" ,
         justifyContent : "center" ,
         alignItems : "center" ,
@@ -77,8 +79,8 @@ const styles = StyleSheet.create({
     } ,
     image :{
         width : "100%" ,
-        height : 80 ,
-        borderRadius : 20 ,
+         height : 100 ,
+     //   borderRadius : 20 ,
         resizeMode : "contain" , 
         marginTop : 10 , 
         marginBottom : 10 ,
