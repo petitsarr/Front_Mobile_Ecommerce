@@ -42,7 +42,7 @@ const ProductsContainer = () => {
             const [filter , setFilter] = useState<boolean>(false) ;  
             const [filterProduct , setFilterProduct] = useState<dataType[]>([]) ;  
             const [categ , setCateg] = useState<datacategory>([]) ;  
-            const [active ,setActive] = useState() ; 
+            const [active ,setActive] = useState<number | null >(null) ; 
              
 
 
@@ -62,7 +62,8 @@ const ProductsContainer = () => {
                   
                 }
 
-            } , []) 
+            } , [])   
+
             
 
       //Filter Product By Category   
@@ -70,8 +71,12 @@ const ProductsContainer = () => {
                         const newProduct = products.filter((item)=>item.category.$oid === id) ; 
                         setFilter(true) ;
                         setFilterProduct(newProduct) ; 
-                     //  setActive(id) ; 
-          }       
+                       
+          }        
+
+          const handlecategory =(index :number) =>{
+                setActive(index) 
+          }
  
 
                 
@@ -116,7 +121,9 @@ const ProductsContainer = () => {
          <View style = {{flex:0.5 , backgroundColor:"white"}} > 
               <CategoryFilter 
                categorie = {categ}    
-                filterProductByCategory = {filterProductByCategory}
+                filterProductByCategory = {filterProductByCategory} 
+                active = {active} 
+               handlecategory = {handlecategory}
                 />
          </View>
        
