@@ -67,10 +67,17 @@ const ProductsContainer = () => {
             
 
       //Filter Product By Category   
-          const filterProductByCategory = (id:string) =>{ 
+          const filterProductByCategory = (id:string) =>{   
+                       if (id ==="all" ) {
+                            setFilterProduct(products) 
+                            setFilter(true)
+                       }
+                       else {
                         const newProduct = products.filter((item)=>item.category.$oid === id) ; 
                         setFilter(true) ;
                         setFilterProduct(newProduct) ; 
+                       }
+                       
                        
           }        
 

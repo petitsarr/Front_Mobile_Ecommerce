@@ -1,4 +1,11 @@
-const category = [ 
+const category = [  
+  {
+    "_id": {
+      "$oid": "all"
+    },
+    "name": "All",
+    "__v": 0
+  }  ,
     {
     "_id": {
       "$oid": "5f15d5cdcb4a6642bddc0fe9"
