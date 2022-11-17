@@ -1,18 +1,44 @@
 import { StyleSheet, Text, View  , Image , Pressable } from 'react-native'
 import React , {useState} from 'react'
-import  { Prope } from "./ProductItem" 
+import  { Prope } from "./ProductItem"   ; 
+import {useNavigation} from "@react-navigation/native"; 
+import { RootStackScreenProps } from '../../types';
 
 const ProductCard = ({item} : Prope) => {   
     
-   
+   const navigation = useNavigation() ; 
+
 
     const {name, image, price, description , countInStock} = item ; 
 
-        return (
+        return ( 
+            <Pressable  
+            onPress = {()=>navigation.navigate("Details" ,  {
+                _id: {
+                    $oid: item._id.$oid,
+                } ,
+                image: item.image,
+                brand: item.brand ,
+                price: item.price,
+                rating: item.rating , 
+                numReviews: item.numReviews,
+                isFeatured: item.isFeatured , 
+                name: item.name ,
+                description: item.description ,  
+                category: {
+                  $oid: item.category.$oid,
+              } ,
+              countInStock: item.countInStock,
+              __v: item.__v, 
+              
+            })}
+        > 
                 <View  style = {styles.container}> 
-                    <Image source={{uri :image }} style={styles.image} /> 
-                    <Text style={styles.name}>{name}</Text> 
-                    <Text style={styles.price}>{price}</Text>
+                   
+                            <Image source={{uri :image }} style={styles.image} /> 
+                            <Text style={styles.name}>{name}</Text> 
+                            <Text style={styles.price}>{price}</Text>
+                   
                    {
                     countInStock  > 0 ? ( 
                         <Pressable onPress={()=>console.log("hello petit")}>
@@ -22,7 +48,8 @@ const ProductCard = ({item} : Prope) => {
                              </Pressable>
                     ) : <Text style ={{color :"#32CD32"}}>Actuellement Indisponible</Text>
                    }
-                </View>
+                </View> 
+                </Pressable>
   )
 }
 

@@ -22,7 +22,9 @@ import LinkingConfiguration from './LinkingConfiguration';
 import  ProductsContainer from "../screens/Products/ProductsContainer" ;  
 import AdminContainer from "../screens/Admin/AdminContainer" ;  
 import UserContainer from "../screens/Users/UserContainer" ; 
-import CartContainer from "../screens/Cart/CartContainer" ;
+import CartContainer from "../screens/Cart/CartContainer" ; 
+import SingleProduct from "../screens/Products/SingleProduct" ;  
+import Header from  "../Shared/Header" ;
 
 import { Entypo } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
@@ -31,8 +33,9 @@ import { FontAwesome } from '@expo/vector-icons';
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
-    //  linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    //  linking={LinkingConfiguration} 
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> 
+      <Header/>
       <BottomTabNavigator />
     </NavigationContainer>
   );
@@ -48,8 +51,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={ProductsContainer} options={{ headerShown: false }} />
-     
-      
+     <Stack.Screen name="Details" component={SingleProduct} options={{ headerShown: true }} />
     </Stack.Navigator>
   );
 }
@@ -64,17 +66,20 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
+    <BottomTab.Navigator 
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: Colors[colorScheme].tint,  
+        tabBarShowLabel:false
+        
       }}>
       <BottomTab.Screen
-        name="Home"
+        name="Home" 
         component={RootNavigator}
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color= {color} />,
+          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color= {color} />, 
+           headerShown : false
          
         }}
       />

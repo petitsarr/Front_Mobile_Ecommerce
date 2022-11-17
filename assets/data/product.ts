@@ -29,7 +29,7 @@ type dataType = {
     "numReviews": 0,
     "isFeatured": true,
     "name": "FIFA 20",
-    "description": "The most hard FIFA ever",
+    "description": "The most hard FIFA eve t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',r",
     "category": {
       "$oid": "5f15d5cdcb4a6642bddc0fe9"
     },
@@ -46,8 +46,8 @@ type dataType = {
     "rating": 5,
     "numReviews": 0,
     "isFeatured": true,
-    "name": "Garden Chair",
-    "description": "beautiful chair for garden",
+    "name": "Garden Chair " ,
+    "description": "beautiful chair for garden  is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',",
     "category": {
       "$oid": "5f15d5b7cb4a6642bddc0fe8"
     },
@@ -65,7 +65,7 @@ type dataType = {
     "numReviews": 0,
     "isFeatured": true,
     "name": "Swimming Pool",
-    "description": "beautiful Swimming Pool for garden",
+    "description": "beautiful Swimming Pool for garden t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',",
     "category": {
       "$oid": "5f15d5b7cb4a6642bddc0fe8"
     },
@@ -82,8 +82,8 @@ type dataType = {
     "rating": 5,
     "numReviews": 0,
     "isFeatured": true,
-    "name": "Grass Cut Machine",
-    "description": "Grass Cut Machine for garden",
+    "name": "Grass Cut Machine" ,
+    "description": "Grass Cut Machine for garden t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',  ",
     "category": {
       "$oid": "5f15d5b7cb4a6642bddc0fe8"
     },
@@ -101,7 +101,7 @@ type dataType = {
     "numReviews": 0,
     "isFeatured": true,
     "name": "Sofa2",
-    "description": "Big Sofa for living room",
+    "description": "Big Sofa for living room t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',",
     "category": {
       "$oid": "5f15d5b2cb4a6642bddc0fe7"
     },
@@ -119,7 +119,7 @@ type dataType = {
     "numReviews": 0,
     "isFeatured": true,
     "name": "Sofa",
-    "description": "Big Sofa for living room",
+    "description": "Big Sofa for living room t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',",
     "category": {
       "$oid": "5f15d5b2cb4a6642bddc0fe7"
     },
@@ -137,7 +137,7 @@ type dataType = {
     "numReviews": 0,
     "isFeatured": true,
     "name": "FIFA 20 -2",
-    "description": "The most hard FIFA ever",
+    "description": "The most hard FIFA ever t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',",
     "category": {
       "$oid": "5f15d5cdcb4a6642bddc0fe9"
     },

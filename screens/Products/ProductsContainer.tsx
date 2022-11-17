@@ -108,7 +108,7 @@ const ProductsContainer = () => {
 
   return (
     <View style={styles.containerP}> 
-        <Header />   
+           
         
         <View style={styles.searchContainer}>   
 
