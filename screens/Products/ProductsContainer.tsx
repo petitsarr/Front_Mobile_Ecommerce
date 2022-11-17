@@ -82,20 +82,20 @@ const ProductsContainer = () => {
                 
    // Search Product By Name  . 
 
-                const filterProducts = (text : string )=>{ 
+                 const filterProducts = (text : string )=>{ 
                         
                         const filterred   = data.filter((product)=>{  
 
-                            let dataText = text.toUpperCase() ;  
+                                let dataText = text.toUpperCase() ;  
 
-                            let productName = product.name.toUpperCase() ;  
+                                let productName = product.name.toUpperCase() ;  
 
-                            return productName.indexOf(dataText) > -1 ;
-                        }) 
-                        setFilterProduct(filterred) ;  
+                                return productName.indexOf(dataText) > -1 ;
+                         }) 
+                                setFilterProduct(filterred) ;  
 
-                        setFilter(true) ;
-                }  
+                                setFilter(true) ;
+                 }  
 
                 
 
@@ -108,9 +108,9 @@ const ProductsContainer = () => {
         <EvilIcons name="search" size={24} color="black" style ={{marginTop :10}} /> 
 
             <TextInput 
-               style={styles.input}  
-                placeholder="Saisir Votre Recherche Ici "  
-                onChangeText={(text)=>filterProducts(text)} 
+                    style={styles.input}  
+                        placeholder="Saisir Votre Recherche Ici "  
+                        onChangeText={(text)=>filterProducts(text)} 
               />     
         </View>    
 
@@ -120,33 +120,42 @@ const ProductsContainer = () => {
 
          <View style = {{flex:0.5 , backgroundColor:"white"}} > 
               <CategoryFilter 
-               categorie = {categ}    
-                filterProductByCategory = {filterProductByCategory} 
-                active = {active} 
-               handlecategory = {handlecategory}
+                    categorie = {categ}    
+                        filterProductByCategory = {filterProductByCategory} 
+                        active = {active} 
+                    handlecategory = {handlecategory}
                 />
          </View>
        
               <View style= {styles.containerFlatlist}>
-              <FlatList    
+            
+                 {filterProduct.length > 0 && products.length > 0  ? ( 
+                    <FlatList    
 
                     contentContainerStyle={styles.list} 
-
+   
                         data={filter ? filterProduct : products} 
-
+   
                         renderItem={({item}) => { 
-
+   
                             return ( 
-
+   
                                     <ProductItem item={item}  />
                                     
                             )
                             }} 
                             
                         keyExtractor = {(item) => item._id.$oid}
+   
+   
+               /> 
 
-
-/> 
+                 ) : (
+                    <View style ={styles.Notfound}>  
+                          <Text style = {styles.textnofound} >No Product Found </Text>
+                        </View>
+                 )}
+             
               </View>
         
       
@@ -200,6 +209,18 @@ const styles = StyleSheet.create({
     } ,
     containerFlatlist :{
         flex : 3,
+    } ,
+    Notfound :{
+        //textAlign : "center" , 
+        justifyContent : "center" , 
+        alignItems : "center" ,  
+        flex : 1 ,
+    }  , 
+    textnofound :{
+        fontSize : 40 , 
+        fontWeight : "bold" , 
+        color : "black" , 
+
     }
 
 })
