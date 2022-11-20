@@ -6,7 +6,8 @@ import Header from "../../Shared/Header"
 import { EvilIcons } from '@expo/vector-icons';  
 import Banner from "../../Shared/Banner" 
 import category from "../../assets/data/categories" ; 
-import CategoryFilter  from "../../components/CategoryFilter" ;
+import CategoryFilter  from "../../components/CategoryFilter" ; 
+import {useDispatch ,useSelector} from "react-redux"
 
 
 export type dataType = {
@@ -45,6 +46,7 @@ const ProductsContainer = () => {
             const [active ,setActive] = useState<number | null >(null) ; 
              
 
+            
 
             useEffect(()=>{ 
                 setProducts(data) 

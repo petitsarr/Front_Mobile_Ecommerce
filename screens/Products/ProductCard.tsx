@@ -2,12 +2,19 @@ import { StyleSheet, Text, View  , Image , Pressable } from 'react-native'
 import React , {useState} from 'react'
 import  { Prope } from "./ProductItem"   ; 
 import {useNavigation} from "@react-navigation/native"; 
-import { RootStackScreenProps } from '../../types';
+import { RootStackScreenProps } from '../../types'; 
+import {useDispatch } from "react-redux" ;  
+
+import {addOneTocart } from "../../Redux/action/actionCartItem" ;
+
 
 const ProductCard = ({item} : Prope) => {   
-    
+
+    const dispatch = useDispatch() ;  
+
    const navigation = useNavigation() ; 
 
+//console.log("my items is ==>" , item) ;  
 
     const {name, image, price, description , countInStock} = item ; 
 
@@ -41,7 +48,9 @@ const ProductCard = ({item} : Prope) => {
                    
                    {
                     countInStock  > 0 ? ( 
-                        <Pressable onPress={()=>console.log("hello petit")}>
+                        <Pressable onPress={()=>{ 
+                         dispatch( addOneTocart(item))
+                        }}>
                         <View style ={{backgroundColor :"#32CD32" ,padding:5,borderRadius :5 ,marginVertical:7 }}>  
                             <Text style ={{color:"white"}}>Add to Cart</Text>
                              </View> 

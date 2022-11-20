@@ -17,7 +17,7 @@ const CategoryFilter = ({categorie, filterProductByCategory , handlecategory  ,a
      <FlatList  
        data={categorie} 
        renderItem ={({item ,index})=>{ 
-              console.log(index)
+            //  console.log(index)
             return(  
                 <TouchableOpacity onPress={()=>{
                     filterProductByCategory(item._id.$oid) 
