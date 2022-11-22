@@ -82,7 +82,7 @@ type dataType = {
     "rating": 5,
     "numReviews": 0,
     "isFeatured": true,
-    "name": "Grass Cut Machine" ,
+    "name": "Grass Cut " ,
     "description": "Grass Cut Machine for garden t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',  ",
     "category": {
       "$oid": "5f15d5b7cb4a6642bddc0fe8"

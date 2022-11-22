@@ -4,7 +4,7 @@ export const remove_from_cart ="REMOVE_FROM_CART";
 export const clear_cart ="CLEAR_CART";  
 export const add_one_to_cart  ="ADD_ONE_TO_CART"; 
 
-export interface ICart  { 
+export interface ICart  {  
     _id: {
         $oid: string;
     };

@@ -1,15 +1,22 @@
-import { StyleSheet, Text, View  ,Image ,ScrollView}  from 'react-native'
+import { StyleSheet, Text, View  ,Image ,ScrollView ,Pressable}  from 'react-native'
 import React,{useState}from 'react' 
 import {useRoute} from "@react-navigation/native"  
-import {DetailsScreenRouteProp} from  "../../types"
+import {DetailsScreenRouteProp} from  "../../types" 
+import {useDispatch} from "react-redux" 
+import {addToCart} from "../../Redux/action/actionCartItem" ; 
+import {useNavigation} from "@react-navigation/native" ;
 
  
-const SingleProduct = () => {  
+const SingleProduct = () => {   
 
+     const [qantity , setQantity] = useState(1) ;
     const route = useRoute<DetailsScreenRouteProp>() ;    
     const [item ,setItem] = useState(route.params) ;
 
-  // console.log("finalement ==> " , item._id.$oid) ;
+  // console.log("finaly ==> " , item._id.$oid) ; 
+
+  const dispatch = useDispatch() ;  
+  const navigation = useNavigation() ;
      
   return (
     <ScrollView>
@@ -30,11 +37,36 @@ const SingleProduct = () => {
         </View> 
         <View style ={styles.price_add}>
             <View style={styles.priceContainer}>
-                <Text style={styles.price}>{`$ ${item.price}`}</Text> 
-            </View> 
+               <View style ={styles.priceonly}>   
+                  <Text style={styles.price}>{`$ ${item.price}`}</Text> 
+                </View>  
+                <View style={styles.qantityContainer}> 
+                  <Pressable  
+                    onPress = {()=>setQantity(qantity > 1 ? qantity - 1 : 1)}
+                   style ={styles.lessContainer} >
+                        <Text style={styles.less}>-</Text>
+                  </Pressable>
+                     <Text style={styles.qantity}>{qantity}</Text> 
+                     <Pressable  
+                        onPress = {()=>setQantity(qantity + 1)}
+                     style = {styles.plusContainer}>
+                        <Text style={styles.plus}>+</Text>
+                  </Pressable>
+               </View>
+            </View>  
+            <Pressable  
+               onPress={()=>{
+                 dispatch (addToCart(item , qantity)) 
+                    navigation.navigate("Home") 
+                   setQantity(1) ;
+               }} > 
             <View style ={styles.addContainer}>
-                <Text style={styles.add}> Add</Text>
-            </View>
+              
+                    <Text style={styles.add}> Add</Text> 
+
+                    </View>
+               </Pressable>
+            
         </View>
     
     </View>
@@ -44,7 +76,7 @@ const SingleProduct = () => {
 
 
 const styles = StyleSheet.create({ 
-    container :  { 
+    container :  {  
         flex : 1 ,
         justifyContent : "center" , 
         alignItems : "center" , 
@@ -98,15 +130,31 @@ const styles = StyleSheet.create({
     } ,
     priceContainer :{ 
         backgroundColor : "white" ,  
-        marginTop : 12 ,
+        marginTop : 12 , 
+        flexDirection : "row" ,
+
+    } , 
+    qantityContainer :{ 
+        flexDirection : "row" , 
+        justifyContent : "space-around" ,
+        width : 100 ,
+        marginHorizontal : 10 ,
+        
+    } , 
+    qantity :{
+        fontSize : 18 , 
+        fontWeight : "bold" , 
+        color : "black" , 
+        marginVertical : 5 , 
 
     } ,
     price :{
-        fontSize : 18 , 
+        fontSize : 20 , 
         fontWeight : "bold" , 
-        marginBottom : 10 ,
+      //  marginBottom : 10 ,
         textAlign : "center" , 
-        color :"orange" ,
+        color :"orange" , 
+        marginVertical : 10 ,
     } ,
     addContainer :{
         backgroundColor : "green" , 
@@ -133,7 +181,47 @@ const styles = StyleSheet.create({
     } ,
     namecontainer :{
         marginVertical : 25 ,
-    }
+    } ,  
+    lessContainer :{
+        backgroundColor : "red" , 
+        width : 45 , 
+        height : 30 ,
+        justifyContent : "center" ,
+        alignItems : "center" ,
+       marginRight : 45,
+       borderRadius : 10 ,
+    } , 
+
+    plusContainer :{  
+        backgroundColor : "green"  , 
+       width : 45 , 
+         height : 30 ,
+        justifyContent : "center" ,
+        alignItems : "center" , 
+        marginLeft : 45 , 
+        borderRadius : 10 ,
+       
+    } ,
+    less :{ 
+        fontSize : 25 , 
+        fontWeight : "bold" ,
+        color : "white" ,
+     //  marginVertical : 10 ,
+
+
+    } ,
+   plus :{ 
+        fontSize : 25 , 
+        fontWeight : "bold" , 
+        color : "white" , 
+     //   marginVertical : 10 ,
+
+   }  , 
+   priceonly :{
+         marginRight : 20 , 
+         marginTop : -5 ,
+        // marginBottom : 20,
+   }
 
 }) 
 

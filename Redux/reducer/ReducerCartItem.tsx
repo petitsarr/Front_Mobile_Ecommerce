@@ -3,11 +3,10 @@ import data from "../../assets/data/product"
 
 
 
-const initial:{cartItems : ICartState} = {
-    cartItems : []
-}
+const initial : ICartState =    []
 
-      
+
+ //console.log("here nous aurons",(initial.cartItems))     
 
 
 const ReducerCartItem= (state =initial,action :ICartAction ) =>{  
@@ -15,38 +14,23 @@ const ReducerCartItem= (state =initial,action :ICartAction ) =>{
     switch(action.type) { 
 
         case add_to_cart :   
-         return {
-            cartItems : [...state.cartItems,action.payload]
-         }
+         return    [...state,action.payload]
+         
         case update_cart :  
-             return {
-                cartItems : state.cartItems.map((itm)=>{
-                    if(itm._id.$oid === action.payload.id) {
-                         return {
-                            ...itm ,
-                            quantity : action.payload.quantity
-                         }
-                    } 
-                    return itm
-                })
-             }
+            return state.map((item)=>item._id.$oid === action.payload.id ? {...item,quantity : action.payload.quantity} : item)
 
         case remove_from_cart:  
-            let newcart = state.cartItems.filter((item)=>{
+            let newcart = state.filter((item)=>{
                 return item._id.$oid !== action.payload.id
             })  
                 return newcart ; 
 
         case add_one_to_cart :   
-            return  {
-                cartItems : [...state.cartItems,action.payload]
-            }
-              
+
+            return   [...state,action.payload] 
+
             case clear_cart : 
-            return
-             {
-                cartItems : []
-             }
+            return []
             
 
         default :

@@ -3,19 +3,19 @@ import { add_to_cart ,remove_from_cart  ,update_cart ,ICart , add_one_to_cart  }
 
 // action creator for adding to cart 
 const uid =()=>Math.random().toString(34).slice(2) 
-export const addToCart =(id :string ,items :ICart[],quantity :number) =>{ 
+export const addToCart =(items :ICart,quantity :number) =>{ 
     return{
         type : add_to_cart , 
         payload : {
-            id  : uid(), 
-            items :items ,
+            ...items ,
             quantity : quantity
             }
     }
 }
 
 // action creator for updating cart  
-export const updateToCart  =(id :string ,quantity :number)  =>{ 
+export const updateToCart  =(id :string ,quantity :number)  =>{  
+    console.log("hello petit", id , quantity) ;
     return{
         type : update_cart  , 
         payload : {
@@ -28,22 +28,24 @@ export const updateToCart  =(id :string ,quantity :number)  =>{
 
 const uid2 =()=>Math.random().toString(34).slice(2) 
 export const addOneTocart =( items : ICart  ) =>{ 
-    console.log("hello petit==>" ,items)
+   // console.log("hello petit==>" ,items)
     return {
         type : add_one_to_cart , 
-        payload :{
-            id : uid2() ,  
-            items  : items , 
+        payload : {
+            ...items ,
             quantity : 1
-        }
+            }
     }
-}
+} 
+
 // action creator for removing from cart  
 
-export const removeFromCart =( cart :ICart )=>{ 
+export const removeFromCart =( id :string )=>{ 
     return{
         type : remove_from_cart , 
-        payload : cart
+        payload : {
+            id : id
+        }
     }
 
 }
