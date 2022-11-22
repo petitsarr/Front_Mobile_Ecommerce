@@ -30,7 +30,7 @@ const ReducerCartItem= (state =initial,action :ICartAction ) =>{
             return   [...state,action.payload] 
 
             case clear_cart : 
-            return []
+            return state = []
             
 
         default :

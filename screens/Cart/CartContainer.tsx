@@ -1,7 +1,8 @@
-import { View, Text ,StyleSheet , Image ,ScrollView } from 'react-native'
+import { View, Text ,StyleSheet , Image ,ScrollView, Pressable } from 'react-native'
 import React ,{useState ,useEffect} from 'react'  ;
-import {useSelector} from "react-redux" ; 
-import CartItem from './CartItem';
+import {useSelector ,useDispatch} from "react-redux" ; 
+import CartItem from './CartItem'; 
+import {clearCart} from "../../Redux/action/actionCartItem" ;
  
 export interface CartType  {  
   //id :string ,
@@ -33,18 +34,20 @@ const CartContainer = () => {
   const [total_sum , setTotal_sum] = useState<number>(0) ;
 
   
-  const carts = useSelector((state :any)=>state.my_produits)  ;  
+  const carts = useSelector((state :any)=>state.my_produits)  ;    
+
+  const dispatch = useDispatch() ; 
    
   console.log("hello petit sarr cva voici le cart" , carts) ;
    
 
   useEffect(()=>{ 
 
-    const total = carts.map((c)=>c.quantity * c.price); 
+    const total = carts.map((c : CartType)=>c.quantity * c.price); 
 
     console.log("My total is ==>" , total) ;  
 
-    const totalSum = total.reduce((a,b)=>a+b , 0) ;   
+    const totalSum = total.reduce((a: number,b : number)=>a+b , 0) ;   
 
     setTotal_sum(totalSum) ; 
 
@@ -68,12 +71,16 @@ const CartContainer = () => {
     <View style={styles.total}>  
      <View style ={styles.txt_sum}> 
         <Text style={styles.totalText}>Total : </Text> 
-        <Text style={styles.totalsum}>{total_sum} $</Text>
+        <Text style={styles.totalsum}>{(total_sum).toFixed(0)} $</Text>
      </View> 
      <View style ={styles.container_checkout}> 
+        <Pressable  
+        onPress ={()=> dispatch(clearCart())} 
+        > 
         <View style ={styles.clearContainer}>
           <Text style={styles.clear}>Clear</Text>
         </View>
+        </Pressable>
          <View style ={styles.checkContainer}>
           <Text style={styles.checkout}>Checkout</Text>
          </View>

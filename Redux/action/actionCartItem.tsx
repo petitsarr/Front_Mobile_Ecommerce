@@ -1,4 +1,4 @@
-import { add_to_cart ,remove_from_cart  ,update_cart ,ICart , add_one_to_cart  } from "../type"; 
+import { add_to_cart ,remove_from_cart  ,update_cart ,ICart , add_one_to_cart  , clear_cart } from "../type"; 
 
 
 // action creator for adding to cart 
@@ -48,5 +48,10 @@ export const removeFromCart =( id :string )=>{
         }
     }
 
+} 
+export const clearCart =()=>{ 
+    return{
+        type : clear_cart 
+    }
 }
 
