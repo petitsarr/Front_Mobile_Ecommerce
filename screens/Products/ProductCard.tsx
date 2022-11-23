@@ -5,7 +5,8 @@ import {useNavigation} from "@react-navigation/native";
 import { RootStackScreenProps } from '../../types'; 
 import {useDispatch } from "react-redux" ;  
 
-import {addOneTocart } from "../../Redux/action/actionCartItem" ;
+import {addOneTocart } from "../../Redux/action/actionCartItem" ; 
+import { addbadgeCart } from "../../Redux/action/actionbadge" ;
 
 
 const ProductCard = ({item} : Prope) => {   
@@ -49,7 +50,8 @@ const ProductCard = ({item} : Prope) => {
                    {
                     countInStock  > 0 ? ( 
                         <Pressable onPress={()=>{ 
-                         dispatch( addOneTocart(item))
+                         dispatch( addOneTocart(item)) 
+                          dispatch(addbadgeCart())
                         }}>
                         <View style ={{backgroundColor :"#32CD32" ,padding:5,borderRadius :5 ,marginVertical:7 }}>  
                             <Text style ={{color:"white"}}>Add to Cart</Text>

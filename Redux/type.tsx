@@ -2,7 +2,10 @@ export const add_to_cart = 'ADD_TO_CART';
 export const update_cart ="UPDATE_CART"; 
 export const remove_from_cart ="REMOVE_FROM_CART"; 
 export const clear_cart ="CLEAR_CART";  
-export const add_one_to_cart  ="ADD_ONE_TO_CART"; 
+export const add_one_to_cart  ="ADD_ONE_TO_CART";  
+export const add_badge_cart ="ADDBADGE_CART"; 
+export const remove_badge_cart ="REMOVEBADGE_CART"; 
+export const remove_all_badge_cart ="REMOVE_ALL_BADGE_CART";
 
 export interface ICart  {  
     _id: {
@@ -47,5 +50,9 @@ export interface ICartActionUpdate  {
 export interface ICartActionRemove  { 
     type: string; 
     payload :string
-}
+}  
 
+
+export interface IBage {
+    type: string;
+}

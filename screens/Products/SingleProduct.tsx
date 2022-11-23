@@ -4,7 +4,8 @@ import {useRoute} from "@react-navigation/native"
 import {DetailsScreenRouteProp} from  "../../types" 
 import {useDispatch} from "react-redux" 
 import {addToCart} from "../../Redux/action/actionCartItem" ; 
-import {useNavigation} from "@react-navigation/native" ;
+import {useNavigation} from "@react-navigation/native" ; 
+import {addbadgeCart ,removeallbadgeCart , removebadgeCart} from "../../Redux/action/actionbadge"
 
  
 const SingleProduct = () => {   
@@ -56,9 +57,10 @@ const SingleProduct = () => {
             </View>  
             <Pressable  
                onPress={()=>{
-                 dispatch (addToCart(item , qantity)) 
-                    navigation.navigate("Home") 
-                   setQantity(1) ;
+                 dispatch (addToCart(item , qantity))  
+                 dispatch(addbadgeCart())
+                 navigation.navigate("Home") 
+                 setQantity(1) ;
                }} > 
             <View style ={styles.addContainer}>
               

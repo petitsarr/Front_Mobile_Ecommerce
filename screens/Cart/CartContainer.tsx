@@ -2,7 +2,8 @@ import { View, Text ,StyleSheet , Image ,ScrollView, Pressable } from 'react-nat
 import React ,{useState ,useEffect} from 'react'  ;
 import {useSelector ,useDispatch} from "react-redux" ; 
 import CartItem from './CartItem'; 
-import {clearCart} from "../../Redux/action/actionCartItem" ;
+import {clearCart} from "../../Redux/action/actionCartItem" ; 
+import {addbadgeCart ,removeallbadgeCart , removebadgeCart} from "../../Redux/action/actionbadge"
  
 export interface CartType  {  
   //id :string ,
@@ -38,14 +39,14 @@ const CartContainer = () => {
 
   const dispatch = useDispatch() ; 
    
-  console.log("hello petit sarr cva voici le cart" , carts) ;
+ // console.log("hello petit sarr cva voici le cart" , carts) ;
    
 
   useEffect(()=>{ 
 
     const total = carts.map((c : CartType)=>c.quantity * c.price); 
 
-    console.log("My total is ==>" , total) ;  
+    //console.log("My total is ==>" , total) ;  
 
     const totalSum = total.reduce((a: number,b : number)=>a+b , 0) ;   
 
@@ -58,7 +59,11 @@ const CartContainer = () => {
    <View style={styles.container}> 
          <ScrollView>
        <View > 
-    {carts.length === 0 ? <Text>Votre panier est vide</Text> :  
+    {carts.length === 0 ?(
+       <View style ={styles.vide}>
+        <Text style={styles.txtvide}>Votre panier est vide</Text>
+         </View>
+    ) :  
       carts.map((item : CartType , index :number  )=>{ 
         console.log("item" , item) ;
         return(
@@ -75,7 +80,10 @@ const CartContainer = () => {
      </View> 
      <View style ={styles.container_checkout}> 
         <Pressable  
-        onPress ={()=> dispatch(clearCart())} 
+        onPress ={()=> {
+          dispatch(clearCart()) 
+          dispatch(removeallbadgeCart())
+        }} 
         > 
         <View style ={styles.clearContainer}>
           <Text style={styles.clear}>Clear</Text>
@@ -178,6 +186,30 @@ const styles = StyleSheet.create({
     color : "white" , 
     fontSize : 15 , 
     fontWeight : "bold" , 
+
+  }  , 
+  vide :{
+   // flex :1 , 
+    justifyContent :"center" , 
+    alignItems :"center" , 
+    backgroundColor : "white" ,  
+    marginTop : 170 ,  
+    height : 200 , 
+    width : "100%" , 
+    borderRadius : 10 ,
+    shadowColor: "red", 
+    shadowOffset: { 
+        width: 0, 
+        height: 2,  
+
+
+    }
+
+  } ,
+  txtvide :{
+    fontSize : 40 , 
+    fontWeight : "bold" , 
+    color : "black" , 
 
   }
 } )

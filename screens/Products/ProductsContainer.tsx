@@ -45,8 +45,9 @@ const ProductsContainer = () => {
             const [categ , setCateg] = useState<datacategory>([]) ;  
             const [active ,setActive] = useState<number | null >(null) ; 
              
-
             
+
+       //     console.log("hello petit sarr cva voici le count_badge====>" , count_badge) ;
 
             useEffect(()=>{ 
                 setProducts(data) 

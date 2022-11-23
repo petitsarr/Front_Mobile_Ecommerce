@@ -3,7 +3,8 @@ import React , {useState ,useEffect} from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import {CartType} from "./CartContainer"   ; 
 import {useDispatch} from "react-redux" ; 
-import { updateToCart , removeFromCart} from "../../Redux/action/actionCartItem"
+import { updateToCart , removeFromCart} from "../../Redux/action/actionCartItem" 
+import {addbadgeCart ,removeallbadgeCart , removebadgeCart} from "../../Redux/action/actionbadge"
 
 type Props = { 
   key : number , 
@@ -48,7 +49,8 @@ const CartItem = ({ key ,item} : Props) => {
             <Text style={styles.total}>{(qantity * item.price)}</Text> 
         </View> 
        <Pressable onPress={()=>{
-            dispatch(removeFromCart(item._id.$oid))
+            dispatch(removeFromCart(item._id.$oid)) 
+            dispatch(removebadgeCart()) ; 
        }}>
        <View style={styles.deleteContainer}>  
           <AntDesign name="delete" size={30} color="#e54342" />

@@ -7,7 +7,7 @@ interface Props {
 }
 const SearchProduct = ({filterProduct}:Props) => { 
 
-    console.log(filterProduct.length) ;
+ //   console.log(filterProduct.length) ;
   return (
    <View>  
             {filterProduct.length > 0 ? (

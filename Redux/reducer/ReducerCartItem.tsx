@@ -1,4 +1,4 @@
-import {add_to_cart ,update_cart ,remove_from_cart ,ICartState ,ICartAction ,ICart ,clear_cart ,  add_one_to_cart} from "../type"  ;
+import {add_to_cart ,update_cart ,remove_from_cart ,ICartState ,ICartAction ,ICart ,clear_cart ,  add_one_to_cart } from "../type"  ;
 import data from "../../assets/data/product"  
 
 
@@ -31,7 +31,7 @@ const ReducerCartItem= (state =initial,action :ICartAction ) =>{
 
             case clear_cart : 
             return state = []
-            
+        
 
         default :
            return state ; 

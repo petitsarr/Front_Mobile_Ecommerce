@@ -30,6 +30,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
  
+import {useDispatch ,useSelector} from "react-redux" 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -59,11 +60,17 @@ function RootNavigator() {
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
- */
+ */ 
+
+ 
+
+
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme(); 
+
+  const count_badge = useSelector((state : any)=>state.my_badge ) ;
 
   return (
     <BottomTab.Navigator 
@@ -79,8 +86,8 @@ function BottomTabNavigator() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <Entypo name="home" size={24} color= {color} />, 
-           headerShown : false
-         
+           headerShown : false 
+           
         }}
       />
       <BottomTab.Screen
@@ -88,7 +95,8 @@ function BottomTabNavigator() {
         component={CartContainer}
         options={{
           title: 'Cart',
-          tabBarIcon: ({ color }) => <Entypo name="shopping-cart" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <Entypo name="shopping-cart" size={24} color={color} />, 
+          tabBarBadge: count_badge
         }}
       /> 
        <BottomTab.Screen
@@ -96,7 +104,8 @@ function BottomTabNavigator() {
         component={AdminContainer}
         options={{
           title: 'Admin',
-          tabBarIcon: ({ color }) => <Ionicons name="settings" size={24} color= {color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="settings" size={24} color= {color} />, 
+          
         }}
       /> 
        <BottomTab.Screen
