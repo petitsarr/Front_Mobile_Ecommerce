@@ -5,7 +5,9 @@
 
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams , RouteProp } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';   
+import {NativeStackNavigationProp} from "@react-navigation/native-stack"
+
 
 declare global {
   namespace ReactNavigation {
@@ -19,19 +21,19 @@ export type RootStackParamList = {
  // NotFound: undefined; 
   Home: undefined;  
   Details : {
-    _id: {
-        $oid: string;
-    };
-    image: string;
-    brand: string;
-    price: number;
-    rating: number;
-    numReviews: number;
-    isFeatured: boolean;
-    name: string;
-    description: string; 
-    category: {
-      $oid: string;
+          _id: {
+              $oid: string;
+          };
+          image: string;
+          brand: string;
+          price: number;
+          rating: number;
+          numReviews: number;
+          isFeatured: boolean;
+          name: string;
+          description: string; 
+          category: {
+            $oid: string;
   };
   countInStock: number;
   __v: number; 
@@ -57,4 +59,22 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 >;
 
 
-export type DetailsScreenRouteProp = RouteProp<RootStackParamList  , "Details">
+export type DetailsScreenRouteProp = RouteProp<RootStackParamList  , "Details">  
+
+
+export type CheckoutTopTabParamList = { 
+  Shipping : undefined; 
+  Payment : undefined; 
+  Confirm : undefined;
+}  
+
+export type CartTopParamList = {
+  Cart : undefined; 
+  Checkout : undefined; 
+}  
+
+// Vérification type de navigation (checkout )
+export type CartTopScreenProps =  NativeStackNavigationProp< 
+  CartTopParamList , 
+ "Checkout"
+>

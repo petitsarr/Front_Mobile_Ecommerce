@@ -6,7 +6,8 @@
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
@@ -16,15 +17,20 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen'; 
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps  ,CheckoutTopTabParamList , CartTopParamList} from '../types';
 import LinkingConfiguration from './LinkingConfiguration'; 
 
 import  ProductsContainer from "../screens/Products/ProductsContainer" ;  
 import AdminContainer from "../screens/Admin/AdminContainer" ;  
 import UserContainer from "../screens/Users/UserContainer" ; 
 import CartContainer from "../screens/Cart/CartContainer" ; 
-import SingleProduct from "../screens/Products/SingleProduct" ;  
-import Header from  "../Shared/Header" ;
+import SingleProduct from "../screens/Products/SingleProduct" ;    
+import Header from  "../Shared/Header" ;  
+
+
+import  Confirm from "../screens/Cart/checkout/Confirm" 
+import  Payment from "../screens/Cart/checkout/Payment" 
+import  Shipping from "../screens/Cart/checkout/Shipping"
 
 import { Entypo } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
@@ -92,11 +98,14 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Cart"
-        component={CartContainer}
+        component={CartNavigator}
         options={{
-          title: 'Cart',
+         // title: 'Cart',
           tabBarIcon: ({ color }) => <Entypo name="shopping-cart" size={24} color={color} />, 
-          tabBarBadge: count_badge
+          tabBarBadge: count_badge   ,
+          headerShown: false ,
+          
+          
         }}
       /> 
        <BottomTab.Screen
@@ -128,4 +137,43 @@ function TabBarIcon(props: {
   color: string;
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+
+const TopTab = createMaterialTopTabNavigator<CheckoutTopTabParamList>();  
+
+
+
+const CheckoutTopTabNavigator =() => {  
+
+ return (
+  <TopTab.Navigator>
+            <TopTab.Screen name="Shipping" component={Shipping} /> 
+            <TopTab.Screen name="Payment" component={Payment} /> 
+            <TopTab.Screen name="Confirm" component={Confirm} />
+</TopTab.Navigator>
+ )
+
+} 
+
+const TabCart = createNativeStackNavigator<CartTopParamList>(); 
+
+const CartNavigator = () => { 
+
+  return(
+    <TabCart.Navigator> 
+      <TabCart.Screen 
+       name="Cart" 
+        component={CartContainer}   
+        options={{ headerShown: false }} 
+        /> 
+      <TabCart.Screen 
+      name="Checkout"
+       component={CheckoutTopTabNavigator} 
+       options ={{
+        title:"Checkout",
+       }}
+        /> 
+    </TabCart.Navigator>
+  )
+
 }

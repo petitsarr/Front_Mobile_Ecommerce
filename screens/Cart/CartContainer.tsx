@@ -3,7 +3,9 @@ import React ,{useState ,useEffect} from 'react'  ;
 import {useSelector ,useDispatch} from "react-redux" ; 
 import CartItem from './CartItem'; 
 import {clearCart} from "../../Redux/action/actionCartItem" ; 
-import {addbadgeCart ,removeallbadgeCart , removebadgeCart} from "../../Redux/action/actionbadge"
+import {addbadgeCart ,removeallbadgeCart , removebadgeCart} from "../../Redux/action/actionbadge" 
+import {useNavigation} from "@react-navigation/native" ;    
+import {CartTopScreenProps} from "../../types"
  
 export interface CartType  {  
   //id :string ,
@@ -39,7 +41,9 @@ const CartContainer = () => {
 
   const dispatch = useDispatch() ; 
    
- // console.log("hello petit sarr cva voici le cart" , carts) ;
+ // console.log("hello petit sarr cva voici le cart" , carts) ; 
+
+ const navigation = useNavigation<CartTopScreenProps>() ;
    
 
   useEffect(()=>{ 
@@ -89,9 +93,13 @@ const CartContainer = () => {
           <Text style={styles.clear}>Clear</Text>
         </View>
         </Pressable>
-         <View style ={styles.checkContainer}>
+        <Pressable  
+        onPress={()=> navigation.navigate("Checkout")}
+        >
+        <View style ={styles.checkContainer}>
           <Text style={styles.checkout}>Checkout</Text>
          </View>
+        </Pressable>
      </View>
     </View>
    </View>
