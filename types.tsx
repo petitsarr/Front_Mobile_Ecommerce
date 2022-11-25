@@ -73,7 +73,7 @@ export type CartTopParamList = {
   Checkout : undefined; 
 }  
 
-// Vérification type de navigation (checkout )
+// Vérification type of my navigation (checkout )
 export type CartTopScreenProps =  NativeStackNavigationProp< 
   CartTopParamList , 
  "Checkout"

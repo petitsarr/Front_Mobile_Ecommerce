@@ -94,6 +94,7 @@ const CartContainer = () => {
         </View>
         </Pressable>
         <Pressable  
+         disabled={carts.length === 0 ? true : false}
         onPress={()=> navigation.navigate("Checkout")}
         >
         <View style ={styles.checkContainer}>
