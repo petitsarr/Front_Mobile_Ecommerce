@@ -2,38 +2,77 @@ import { Image, Text, TextInput, TouchableOpacity, View  ,StyleSheet} from 'reac
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import React ,{useState , useEffect } from 'react'  
 import {useSelector} from "react-redux" ;  
-import { Icon, Select } from 'native-base';  
+import { Icon, Select  } from 'native-base';  
 import {countries} from "../../../assets/countries" 
 import { NativeBaseProvider } from 'native-base';
+import { useNavigation } from '@react-navigation/native'; 
+import {NativeStackNavigationProp} from "@react-navigation/native-stack" 
+import { checkoutNavigationProp } from '../../../types'   ; 
 
+
+type type_items = { 
+  _id: {
+    $oid: string;
+};
+image: string;
+brand: string;
+price: number;
+rating: number;
+numReviews: number;
+isFeatured: boolean;
+name: string;
+description: string; 
+category: {
+  $oid: string;
+};
+countInStock: number;
+__v: number; 
+} []
 
 const Shipping = () => {   
 
   // Mes artciles de commande depuis mon store  
-  const [orderitems , setOrderitems] = useState() ; 
+  const [orderitems , setOrderitems] = useState<type_items>([]) ; 
     const [phone, setPhone] = useState('')
     const [city, setCity] = useState('')
     const [adress1, setAdress1] = useState('') 
     const [adress2, setAdress2] = useState('')
     const [zip, setZip] = useState('') 
-    const [country, setCountry] = useState<string>('')  
-    
-    console.log("country selectionnné est ==>" , country)
+    const [country, setCountry] = useState<string>('')   
 
-    const items = useSelector((state :any)=>state.my_produits)  ;
+    const navigation = useNavigation<checkoutNavigationProp>();
+    
+  //  console.log("country selectionnné est ==>" , country)
+
+    const items = useSelector((state :any)=>state.my_produits)  ; 
+    console.log("mes items sont ", items) ;
 
 useEffect(()=>{
-  setOrderitems(items)  
-  return ()=>{
-    setOrderitems() 
+        setOrderitems(items)  
+        return ()=>{
+          setOrderitems([]) 
   } 
 },[])
   
-
+const checkout = ()=>{
+    navigation.navigate('Payment' , {
+       orderitems 
+       , phone 
+       , city , 
+       adress1 , 
+       adress2 , 
+       zip , 
+       country , 
+       dateorder : new Date().toLocaleString()
+      }) 
+}
   return (
    
     <View style={styles.container}>
-    <KeyboardAwareScrollView
+    <KeyboardAwareScrollView 
+      viewIsInsideTabBar={true} 
+      extraScrollHeight={200} 
+      enableOnAndroid={true}
         style={{ 
        //  flex: 2,
              width: '100%' 
@@ -97,12 +136,14 @@ useEffect(()=>{
        <View style ={{
       //  flex : 0  ,
         width : '100%' , 
-       height : 400 ,  
+       height : 100,   
+    //   backgroundColor : 'red' ,
        //marginHorizontal : 30 , 
       // padding :30
     }}>
     <NativeBaseProvider>
-      <Select
+      <Select 
+                  
                     placeholder="Choisir le Pays"
                     selectedValue={country}
                     width="100%"  
@@ -110,12 +151,14 @@ useEffect(()=>{
                     borderColor = "red"  
                     padding={3} 
                     marginX ={7} 
-                    marginY ={3}
+                    marginY ={3} 
+                    onValueChange={(itemValue) => setCountry(itemValue)}  
+                    
   
     //  height = {150} 
    //  marginY = {15} 
    //  marginLeft={-5}
-      onValueChange={(itemValue: string) => setCountry(itemValue)}
+    //  onValueChange={(itemValue: string) => setCountry(itemValue)}
     >  
     { 
         countries.map((c)=>{ 
@@ -125,9 +168,13 @@ useEffect(()=>{
                 value= {c.name} 
                style ={{
                // height:500   ,
-                backgroundColor :"#DCDCDC",
+               // backgroundColor :"blue",
                // marginTop : 30 
-               marginHorizontal : 10
+               marginHorizontal : 10  ,  
+               backgroundColor:"#DCDCDC" ,
+
+               height : 55
+               
                 
             }}  
             key ={c.code}
@@ -143,15 +190,19 @@ useEffect(()=>{
 
         </Select>
       </NativeBaseProvider>
-    </View>
+    </View> 
+
+    <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+                checkout()
+            }}>
+            <Text style={styles.buttonTitle}>Confirmer</Text>
+        </TouchableOpacity>
      
     </KeyboardAwareScrollView>  
     
-    <TouchableOpacity
-            style={styles.button}
-            onPress={() => console.log("hello petit cva")}>
-            <Text style={styles.buttonTitle}>Confirmer</Text>
-        </TouchableOpacity>
+   
 </View>
   )
 }

@@ -64,9 +64,37 @@ export type DetailsScreenRouteProp = RouteProp<RootStackParamList  , "Details">
 
 export type CheckoutTopTabParamList = { 
   Shipping : undefined; 
-  Payment : undefined; 
+  Payment : {
+    orderitems  :{ 
+      _id: {
+        $oid: string;
+    };
+    image: string;
+    brand: string;
+    price: number;
+    rating: number;
+    numReviews: number;
+    isFeatured: boolean;
+    name: string;
+    description: string; 
+    category: {
+      $oid: string;
+};
+countInStock: number;
+__v: number; 
+    }[] , 
+    phone :string , 
+    city : string , 
+    adress1  : string ,  
+    adress2 : string , 
+    zip : string , 
+    country : string , 
+    dateorder : string ,
+  }; 
   Confirm : undefined;
-}  
+}   
+
+export type checkoutNavigationProp = NativeStackNavigationProp<CheckoutTopTabParamList ,"Payment" >
 
 export type CartTopParamList = {
   Cart : undefined; 
