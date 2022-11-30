@@ -29,7 +29,9 @@ countInStock: number;
 __v: number; 
 } []
 
-const Shipping = () => {   
+const Shipping = () => {    
+
+
 
   // Mes artciles de commande depuis mon store  
   const [orderitems , setOrderitems] = useState<type_items>([]) ; 
@@ -45,27 +47,24 @@ const Shipping = () => {
   //  console.log("country selectionnné est ==>" , country)
 
     const items = useSelector((state :any)=>state.my_produits)  ; 
-    console.log("mes items sont ", items) ;
+ //   console.log("mes items sont ", items) ;
 
 useEffect(()=>{
         setOrderitems(items)  
         return ()=>{
           setOrderitems([]) 
   } 
-},[])
+},[])     
+
+let order = {orderitems , phone , city , adress1 , adress2 , zip , country , dateorder : new Date().toString() } ;
   
+//console.log(phone , city , adress1 , adress2 , zip , country) ;
 const checkout = ()=>{
     navigation.navigate('Payment' , {
-       orderitems 
-       , phone 
-       , city , 
-       adress1 , 
-       adress2 , 
-       zip , 
-       country , 
-       dateorder : new Date().toLocaleString()
-      }) 
-}
+     order
+      } ) 
+} 
+// console.log("je suis dans le component Shipping.tsx")
   return (
    
     <View style={styles.container}>

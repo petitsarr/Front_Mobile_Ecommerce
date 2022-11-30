@@ -8,6 +8,11 @@ import { CompositeScreenProps, NavigatorScreenParams , RouteProp } from '@react-
 import { NativeStackScreenProps } from '@react-navigation/native-stack';   
 import {NativeStackNavigationProp} from "@react-navigation/native-stack"
 
+import { 
+   MaterialTopTabScreenProps ,
+    MaterialTopTabNavigationProp , 
+  
+ } from "@react-navigation/material-top-tabs"
 
 declare global {
   namespace ReactNavigation {
@@ -55,7 +60,9 @@ export type RootTabParamList = {
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
+  NativeStackScreenProps<RootStackParamList>  
+
+  
 >;
 
 
@@ -64,37 +71,70 @@ export type DetailsScreenRouteProp = RouteProp<RootStackParamList  , "Details">
 
 export type CheckoutTopTabParamList = { 
   Shipping : undefined; 
-  Payment : {
-    orderitems  :{ 
-      _id: {
+  Payment :{
+    order :  {
+      orderitems  :{ 
+        _id: {
+          $oid: string;
+      };
+      image: string;
+      brand: string;
+      price: number;
+      rating: number;
+      numReviews: number;
+      isFeatured: boolean;
+      name: string;
+      description: string; 
+      category: {
         $oid: string;
-    };
-    image: string;
-    brand: string;
-    price: number;
-    rating: number;
-    numReviews: number;
-    isFeatured: boolean;
-    name: string;
-    description: string; 
-    category: {
-      $oid: string;
-};
-countInStock: number;
-__v: number; 
-    }[] , 
-    phone :string , 
-    city : string , 
-    adress1  : string ,  
-    adress2 : string , 
-    zip : string , 
-    country : string , 
-    dateorder : string ,
+  };
+  countInStock: number;
+  __v: number; 
+      }[] , 
+      phone :string , 
+      city : string , 
+      adress1  : string ,  
+      adress2 : string , 
+      zip : string , 
+      country : string , 
+      dateorder : string ,
+    }
   }; 
-  Confirm : undefined;
-}   
+  Confirm : {
+      order : {
+        orderitems  :{ 
+          _id: {
+            $oid: string;
+        };
+        image: string;
+        brand: string;
+        price: number;
+        rating: number;
+        numReviews: number;
+        isFeatured: boolean;
+        name: string;
+        description: string; 
+        category: {
+          $oid: string;
+    };
+    countInStock: number;
+    __v: number; 
+        }[] ,
+        phone :string , 
+        city : string , 
+        adress1  : string , 
+        adress2 : string ,  
+        zip : string , 
+        country : string , 
+        dateorder : string ,
+  
+      }
 
-export type checkoutNavigationProp = NativeStackNavigationProp<CheckoutTopTabParamList ,"Payment" >
+    
+  };
+}    
+
+export type checkoutNavigationProp = NativeStackNavigationProp<CheckoutTopTabParamList>
 
 export type CartTopParamList = {
   Cart : undefined; 
@@ -105,4 +145,12 @@ export type CartTopParamList = {
 export type CartTopScreenProps =  NativeStackNavigationProp< 
   CartTopParamList , 
  "Checkout"
->
+> 
+
+ 
+export type  checkRouteProp= RouteProp<CheckoutTopTabParamList ,"Payment"> 
+
+export type  checkRouteProp3= RouteProp<CheckoutTopTabParamList ,"Confirm">
+
+
+export type  checkRouteProp4= RouteProp<CartTopParamList ,"Checkout">
