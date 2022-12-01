@@ -4,10 +4,13 @@ import { useRoute ,useNavigation } from "@react-navigation/native"
 import { ListItem, Avatar } from '@rneui/themed' 
 import { NativeBaseProvider, ScrollView } from 'native-base'; 
 import { Icon, Select  } from 'native-base';  
-import { checkoutNavigationProp  , checkRouteProp } from '../../../types'   ; 
-//import { types } from '@babel/core';
+import { checkoutNavigationProp  , checkRouteProp } from '../../../types'   ;  
+import {useDispatch ,useSelector} from "react-redux"
+//import { types } from '@babel/core'; 
 
-type type_orders = { 
+
+
+export type type_orders = { 
   orderitems  :{ 
     _id: {
       $oid: string;
@@ -38,12 +41,18 @@ __v: number;
      const Payment = () => {    
 
               const route = useRoute<checkRouteProp>() ;
-              console.log("route.params sur payment est ==>" , route.params) ; 
+           //   console.log("route.params sur payment est ==>" , route.params.myorder.adress1) ;   
+
+
+              
+
+              let myparams  : type_orders = route.params?.myorder ; 
+              
               const[selected , setSelected] = useState(0) ;  
      
               const [cardd ,setCardd] = useState(" ") 
   
- 
+             
 
                 const methods = [
                   {
@@ -165,7 +174,7 @@ __v: number;
                     ) : null}  
                     <View style ={styles.buttonContainer}> 
                     <Pressable style = {styles.button} onPress ={()=>{
-                      navigation.navigate("Confirm" , {order : route.params.order })
+                      navigation.navigate("Confirm" , {myorder : myparams })
                     }} 
                     >
                       <Text style ={styles.buttonText}>Continue</Text>

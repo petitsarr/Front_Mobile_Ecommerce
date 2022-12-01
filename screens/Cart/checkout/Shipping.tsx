@@ -27,7 +27,7 @@ category: {
 };
 countInStock: number;
 __v: number; 
-} []
+} [] 
 
 const Shipping = () => {    
 
@@ -54,15 +54,18 @@ useEffect(()=>{
         return ()=>{
           setOrderitems([]) 
   } 
-},[])     
+},[])    
 
-let order = {orderitems , phone , city , adress1 , adress2 , zip , country , dateorder : new Date().toString() } ;
+
+let order  = {orderitems , phone , city , adress1 , adress2 , zip , country , dateorder : new Date().toString() } ; 
+ console.log("order est ==>" , (order)) ;
   
 //console.log(phone , city , adress1 , adress2 , zip , country) ;
 const checkout = ()=>{
-    navigation.navigate('Payment' , {
-     order
-      } ) 
+        navigation.navigate("Payment",{
+          myorder : order
+        }  
+        )
 } 
 // console.log("je suis dans le component Shipping.tsx")
   return (
@@ -194,7 +197,14 @@ const checkout = ()=>{
     <TouchableOpacity
             style={styles.button}
             onPress={() => {
-                checkout()
+                checkout()  
+                console.log("je suis dans le onPress du bouton checkout")
+                setAdress2(' ') 
+                setAdress1(' ') 
+                setCity(' ') 
+                setCountry(' ') 
+                setPhone(' ') 
+                setZip('') 
             }}>
             <Text style={styles.buttonTitle}>Confirmer</Text>
         </TouchableOpacity>

@@ -63,7 +63,9 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   NativeStackScreenProps<RootStackParamList>  
 
   
->;
+>;  
+
+
 
 
 export type DetailsScreenRouteProp = RouteProp<RootStackParamList  , "Details">  
@@ -72,7 +74,7 @@ export type DetailsScreenRouteProp = RouteProp<RootStackParamList  , "Details">
 export type CheckoutTopTabParamList = { 
   Shipping : undefined; 
   Payment :{
-    order :  {
+    myorder  :  {
       orderitems  :{ 
         _id: {
           $oid: string;
@@ -91,17 +93,17 @@ export type CheckoutTopTabParamList = {
   countInStock: number;
   __v: number; 
       }[] , 
-      phone :string , 
+      phone  :string , 
       city : string , 
-      adress1  : string ,  
-      adress2 : string , 
+      adress1   : string ,  
+      adress2  : string , //
       zip : string , 
       country : string , 
       dateorder : string ,
-    }
+    } 
   }; 
   Confirm : {
-      order : {
+      myorder : {
         orderitems  :{ 
           _id: {
             $oid: string;
@@ -120,15 +122,15 @@ export type CheckoutTopTabParamList = {
     countInStock: number;
     __v: number; 
         }[] ,
-        phone :string , 
-        city : string , 
-        adress1  : string , 
-        adress2 : string ,  
-        zip : string , 
-        country : string , 
-        dateorder : string ,
+        phone:string , 
+        city: string , 
+        adress1 : string , 
+        adress2: string ,  
+        zip: string , 
+        country: string , 
+        dateorder: string ,
   
-      }
+      } 
 
     
   };
@@ -147,10 +149,16 @@ export type CartTopScreenProps =  NativeStackNavigationProp<
  "Checkout"
 > 
 
- 
+// valider commandde vers cart ! 
+export type confirm_commande_ScreenProps = NativeStackNavigationProp<  
+  CartTopParamList  , 
+      "Cart" 
+>
+
+
 export type  checkRouteProp= RouteProp<CheckoutTopTabParamList ,"Payment"> 
 
-export type  checkRouteProp3= RouteProp<CheckoutTopTabParamList ,"Confirm">
+//export type  checkRouteProp3= RouteProp<CheckoutTopTabParamList ,"Confirm">
 
 
-export type  checkRouteProp4= RouteProp<CartTopParamList ,"Checkout">
+//export type  checkRouteProp4= RouteProp<CartTopParamList ,"Checkout">
