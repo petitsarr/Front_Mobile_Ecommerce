@@ -40,7 +40,7 @@ const CategoryFilter = ({categorie, filterProductByCategory , handlecategory  ,a
        }} 
          keyExtractor={(item)=>item._id.$oid}
          horizontal ={true} 
-            showsHorizontalScrollIndicator={false}
+            showsHorizontalScrollIndicator={true}
      />
   )
 }
