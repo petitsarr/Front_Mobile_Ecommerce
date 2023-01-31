@@ -76,16 +76,16 @@ const ProductsContainer = () => {
                             setFilter(true)
                        }
                        else {
-                        const newProduct = products.filter((item)=>item.category.$oid === id) ; 
-                        setFilter(true) ;
-                        setFilterProduct(newProduct) ; 
+                                const newProduct = products.filter((item)=>item.category.$oid === id) ; 
+                                setFilter(true) ;
+                                setFilterProduct(newProduct) ; 
                        }
                        
                        
           }        
 
           const handlecategory =(index :number) =>{
-                setActive(index) 
+                   setActive(index) 
           }
  
 
@@ -130,10 +130,10 @@ const ProductsContainer = () => {
 
          <View style = {{flex:0.5 , backgroundColor:"white"}} > 
               <CategoryFilter 
-                    categorie = {categ}    
+                        categorie = {categ}    
                         filterProductByCategory = {filterProductByCategory} 
                         active = {active} 
-                    handlecategory = {handlecategory}
+                        handlecategory = {handlecategory}
                 />
          </View>
        
@@ -162,7 +162,7 @@ const ProductsContainer = () => {
 
                  ) : (
                     <View style ={styles.Notfound}>  
-                          <Text style = {styles.textnofound} >No Product Found </Text>
+                          <Text style = {styles.textnofound} >AUCUN PRODUIT TROUVÉ </Text>
                         </View>
                  )}
              
